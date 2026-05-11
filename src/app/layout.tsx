@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import LiveBackground from "@/components/LiveBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-body-md bg-background text-on-surface min-h-[100dvh] antialiased relative overflow-x-hidden`}
       >
+        <LiveBackground />
         {children}
       </body>
     </html>

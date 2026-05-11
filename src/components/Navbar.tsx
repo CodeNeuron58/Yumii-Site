@@ -11,7 +11,7 @@ export function Navbar() {
           <img
             alt="Yumii AI Logo"
             className="h-10 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/ADBb0uh8BNZ6753MPpvTDK7zwMb046LMLatXPq2qRlo5VwE5AXOAYW-sc_D3Ca3uHT7xflYCy3h1GaRZwEmMNfX0UR-M5o1sfQIbRaq410CIWH8l_5C7Y6QNuqKiut3rMW2rD-MtRB0BgQlZOysoDIB1Hii3w3kkUaOkrBz9ksYkM9lcTDw5ju-bHd6Qq0osmM5hlWEKdsrj9Nn7E_B0BPIDcvTSyrNTxuFkNxET4Xihwi7FZaTSudBd8ep3qP4AYByPCGTtIEIYt4cvLA"
+            src="/yumi-nav.png"
           />
         </div>
         <div className="hidden md:flex items-center gap-8">

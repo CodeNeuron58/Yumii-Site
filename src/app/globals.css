@@ -92,7 +92,7 @@
 
 @layer utilities {
   .terminal-glow {
-    box-shadow: 0 0 20px rgba(116, 164, 124, 0.1);
+    animation: pulse-glow 4s ease-in-out infinite;
   }
 
   .cursor-blink {
@@ -102,5 +102,24 @@
   @keyframes blink {
     from, to { opacity: 1; }
     50% { opacity: 0; }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 15px rgba(116, 164, 124, 0.05); 
+    }
+    50% { 
+      box-shadow: 0 0 35px rgba(116, 164, 124, 0.25); 
+      border-color: rgba(116, 164, 124, 0.4); 
+    }
+  }
+
+  @keyframes scanline {
+    0% { transform: translateY(-100vh); }
+    100% { transform: translateY(100vh); }
+  }
+
+  .animate-scanline {
+    animation: scanline 8s linear infinite;
   }
 }
