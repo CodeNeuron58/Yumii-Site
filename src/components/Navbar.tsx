@@ -29,7 +29,7 @@ export function Navbar() {
           </Link>
           <Link
             className="font-body-md text-body-md text-on-secondary-container hover:text-primary transition-colors duration-200"
-            href="#"
+            href="/docs"
           >
             Docs
           </Link>
