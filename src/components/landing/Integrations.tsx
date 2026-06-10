@@ -1,26 +1,33 @@
 type Chip = { label: string; icon: string };
 
-// Two rows of 8, matching the reference layout
+// Two rows of 8. Grouped by role so the grid reads as a real stack
+// rather than a feature-shopping list.
 const rowOne: Chip[] = [
-  { label: "WhatsApp", icon: "💬" },
-  { label: "Telegram", icon: "✈️" },
-  { label: "Discord", icon: "💜" },
-  { label: "Slack", icon: "💼" },
-  { label: "GitHub", icon: "🐙" },
-  { label: "VS Code", icon: "🔵" },
-  { label: "iMessage", icon: "💬" },
-  { label: "Email", icon: "✉️" },
+  // LLM providers
+  { label: "Groq", icon: "⚡" },
+  { label: "OpenAI", icon: "🟢" },
+  { label: "Anthropic", icon: "🧠" },
+  // STT
+  { label: "Local Whisper", icon: "🎧" },
+  { label: "Groq Whisper", icon: "🟢" },
+  // TTS
+  { label: "ElevenLabs", icon: "🔊" },
+  { label: "CAMB.ai", icon: "🌐" },
+  // Avatar runtime
+  { label: "Live2D", icon: "🎭" },
 ];
 
 const rowTwo: Chip[] = [
-  { label: "Google", icon: "🔍" },
-  { label: "Notion", icon: "📝" },
-  { label: "Obsidian", icon: "🔮" },
-  { label: "Spotify", icon: "🎵" },
-  { label: "Figma", icon: "🎨" },
-  { label: "Browser", icon: "🌐" },
-  { label: "ChatGPT", icon: "🤖" },
-  { label: "and more", icon: "⋯" },
+  // Extensibility
+  { label: "LangChain tools", icon: "🧰" },
+  { label: "MCP servers", icon: "🔌" },
+  // Plumbing
+  { label: "OS Keychain", icon: "🔐" },
+  { label: "SQLite", icon: "🗄️" },
+  { label: "FastAPI + WebSocket", icon: "🚀" },
+  { label: "LangGraph", icon: "🔁" },
+  { label: "DuckDuckGo", icon: "🦆" },
+  { label: "+ more", icon: "✨" },
 ];
 
 export function Integrations() {
