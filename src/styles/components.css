@@ -1,0 +1,238 @@
+/* Card patterns and grids used across the section components.
+   Every card uses the same base (dark surface, border, hover lift +
+   green border). Variants override icon-box, inner spacing, and
+   decoration. */
+
+/* Shared card shell */
+.feature-card,
+.update-card,
+.personality-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.feature-card:hover,
+.update-card:hover,
+.personality-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Features grid + cards */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.feature-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-green-glow);
+  border: 1px solid var(--color-green-dim);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--color-green-soft);
+}
+
+.feature-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.feature-desc {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  line-height: 1.5;
+}
+
+/* Updates (changelog) */
+.updates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.update-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.update-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cpath d='M60 80 Q20 60 0 20 Q40 40 80 0 Z' fill='rgba(63,185,80,0.06)'/%3E%3C/svg%3E")
+    no-repeat center/contain;
+  pointer-events: none;
+}
+
+.update-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.update-version {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-green-soft);
+  background: var(--color-green-glow);
+  border: 1px solid var(--color-green-dim);
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.update-date {
+  font-size: 11px;
+  color: var(--color-text-dim);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.update-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.35;
+  color: var(--color-on-surface);
+}
+
+.update-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.update-bullets li {
+  font-size: 13px;
+  color: var(--color-on-surface-variant);
+  line-height: 1.5;
+  padding-left: 16px;
+  position: relative;
+}
+
+.update-bullets li::before {
+  content: "›";
+  color: var(--color-primary);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Personality */
+.personality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.personality-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.personality-icon-box {
+  width: 36px;
+  height: 36px;
+  background: var(--color-green-glow);
+  border: 1px solid var(--color-green-dim);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.personality-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-on-surface);
+  line-height: 1.2;
+}
+
+.personality-mood {
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+  line-height: 1.4;
+}
+
+/* Attribution (the project's open-source invitation, replaces the old
+   testimonials block) */
+.attribution-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-on-surface-variant);
+  max-width: 640px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.attribution-body strong {
+  color: var(--color-on-surface);
+  font-weight: 600;
+}
+
+.attribution-cta {
+  display: inline-flex;
+  text-align: center;
+}
+
+/* Integrations (8x2 emoji grid) */
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.integration-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-DEFAULT);
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-on-surface-variant);
+  font-weight: 500;
+  cursor: default;
+  transition: border-color 0.2s, color 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.integration-item:hover {
+  border-color: var(--color-primary);
+  color: var(--color-on-surface);
+}
+
+.integration-icon {
+  font-size: 20px;
+}

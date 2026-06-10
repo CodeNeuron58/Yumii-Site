@@ -1,51 +1,14 @@
 "use client";
 
 import { useState } from "react";
-
-type Installer = {
-  id: string;
-  label: string;
-  commandLines: string[];
-  note: string;
-};
-
-const installers: Installer[] = [
-  {
-    id: "windows",
-    label: "Windows",
-    commandLines: [
-      "irm https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.ps1 | iex",
-    ],
-    note:
-      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
-  },
-  {
-    id: "unix",
-    label: "macOS / Linux",
-    commandLines: [
-      "curl -LsSf https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.sh | sh",
-    ],
-    note:
-      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
-  },
-  {
-    id: "source",
-    label: "From source",
-    commandLines: [
-      "git clone https://github.com/CodeNeuron58/Yumii.git",
-      "cd Yumii",
-      "uv sync",
-      "yumii wake-up",
-    ],
-    note:
-      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
-  },
-];
-
-const COMMENT = "# Get Yumii up and running in seconds";
+import {
+  QUICKSTART_COMMENT,
+  installers,
+  type Installer,
+} from "./data/installers";
 
 export function QuickStart() {
-  const [activeId, setActiveId] = useState(installers[0].id);
+  const [activeId, setActiveId] = useState<Installer["id"]>(installers[0].id);
   const [copied, setCopied] = useState(false);
   const active = installers.find((item) => item.id === activeId) ?? installers[0];
 
@@ -87,7 +50,7 @@ export function QuickStart() {
         </div>
 
         <div className="code-body">
-          <div className="code-comment">{COMMENT}</div>
+          <div className="code-comment">{QUICKSTART_COMMENT}</div>
           {active.commandLines.map((line, idx) =>
             idx === 0 ? (
               <div className="code-line" key={idx}>

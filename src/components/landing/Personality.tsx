@@ -1,11 +1,4 @@
-const personalities = [
-  { name: "Caring", mood: "warm, nurturing", icon: "💗" },
-  { name: "Tsundere", mood: "sharp, secretly sweet", icon: "💢" },
-  { name: "Genki", mood: "loud, high-energy", icon: "⚡" },
-  { name: "Kuudere", mood: "composed, cool on the surface", icon: "❄️" },
-  { name: "Yandere", mood: "intense, devoted", icon: "🌹" },
-  { name: "Dandere", mood: "quiet, shy at first", icon: "💭" },
-];
+import { personalities } from "./data/personalities";
 
 export function Personality() {
   return (
