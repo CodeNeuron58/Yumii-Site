@@ -1,46 +1,44 @@
-type Tag = { label: string };
-
 type Update = {
+  version: string;
   date: string;
   title: string;
-  body: string;
-  tags: Tag[];
-  variant: "latest" | "dev" | "feat";
-  badgeLabel: string;
+  bullets: string[];
 };
 
 const updates: Update[] = [
   {
-    date: "May 28, 2026",
-    title: "Smarter, Faster, More Capable",
-    body: "Improved voice accuracy, faster tool calling, and a brand new memory system.",
-    tags: [{ label: "release" }, { label: "changelog" }],
-    variant: "latest",
-    badgeLabel: "LATEST",
+    version: "v0.3.0",
+    date: "June 2026",
+    title: "Streaming engine + custom LangGraph loop",
+    bullets: [
+      "Heuristic emotion classifier",
+      "HITL confirmation gate",
+      "MCP loader",
+      "DuckDuckGo search tool",
+    ],
   },
   {
-    date: "May 15, 2026",
-    title: "Introducing Skills SDK",
-    body: "Build custom skills and extend with your own tools and logic.",
-    tags: [{ label: "development" }],
-    variant: "dev",
-    badgeLabel: "DEV",
+    version: "v0.2.0",
+    date: "April 2026",
+    title: "Memory & sessions",
+    bullets: [
+      "Persistent SQLite memory",
+      "Per-session checkpoints",
+      "Automatic fact extraction",
+    ],
   },
   {
-    date: "May 05, 2026",
-    title: "Local Models Support",
-    body: "Run Yumii with local LLMs for complete privacy and control.",
-    tags: [{ label: "feature" }],
-    variant: "feat",
-    badgeLabel: "FEAT",
+    version: "v0.1.0",
+    date: "January 2026",
+    title: "First public release",
+    bullets: [
+      "Real-time voice loop",
+      "Live2D avatar",
+      "Six personalities",
+      "Three LLM providers",
+    ],
   },
 ];
-
-const badgeClass: Record<Update["variant"], string> = {
-  latest: "badge badge-latest",
-  dev: "badge badge-dev",
-  feat: "badge badge-feat",
-};
 
 export function Updates() {
   return (
@@ -49,26 +47,28 @@ export function Updates() {
         <div className="section-title">
           <span className="emoji">🌿</span> Latest Updates
         </div>
-        <a href="#" className="section-link">
-          Read all →
+        <a
+          href="https://github.com/CodeNeuron58/Yumii/blob/master/CHANGELOG.md"
+          className="section-link"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Read full changelog →
         </a>
       </div>
       <div className="updates-grid">
         {updates.map((update) => (
-          <div key={update.title} className="update-card">
-            <div className="update-badge">
-              <span className={badgeClass[update.variant]}>{update.badgeLabel}</span>
+          <div key={update.version} className="update-card">
+            <div className="update-meta">
+              <span className="update-version">{update.version}</span>
               <span className="update-date">{update.date}</span>
             </div>
             <div className="update-title">{update.title}</div>
-            <div className="update-desc">{update.body}</div>
-            <div className="update-tags">
-              {update.tags.map((tag) => (
-                <span key={tag.label} className="update-tag">
-                  {tag.label}
-                </span>
+            <ul className="update-bullets">
+              {update.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>
