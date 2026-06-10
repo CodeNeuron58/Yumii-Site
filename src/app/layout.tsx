@@ -1,23 +1,30 @@
-import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
-import LiveBackground from "@/components/LiveBackground";
+﻿import type { Metadata } from "next";
+import { Space_Grotesk, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
-  weight: ["400", "600"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Yumii AI - Your Local AI Companion",
-  description: "A real-time voice AI with 6 personalities, live expressions, and a Live2D avatar. Everything runs locally for maximum privacy and performance.",
+  title: "YUMI - AI Companion",
+  description:
+    "Real-time voice interaction, tool calling, and persistent memory. Built for developers. Designed for productivity.",
 };
 
 export default function RootLayout({
@@ -28,9 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-body-md bg-background text-on-surface min-h-[100dvh] antialiased relative overflow-x-hidden`}
+        className={`${spaceGrotesk.variable} ${geist.variable} ${geistMono.variable} font-body bg-background text-on-surface min-h-screen antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary`}
       >
-        <LiveBackground />
         {children}
       </body>
     </html>

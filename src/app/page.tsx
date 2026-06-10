@@ -1,11 +1,5 @@
-import { Navbar } from "@/components/Navbar";
-import HomeClient from "@/components/HomeClient";
+﻿import { Landing } from "@/components/landing";
 
 export default function Home() {
-  return (
-    <>
-      <Navbar />
-      <HomeClient />
-    </>
-  );
+  return <Landing />;
 }
