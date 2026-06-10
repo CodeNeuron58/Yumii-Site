@@ -1,5 +1,3 @@
-import { ArrowLongRightIcon, ArrowRightIcon } from "./icons";
-
 type Tag = { label: string };
 
 type Update = {
@@ -7,7 +5,8 @@ type Update = {
   title: string;
   body: string;
   tags: Tag[];
-  badge?: string;
+  variant: "latest" | "dev" | "feat";
+  badgeLabel: string;
 };
 
 const updates: Update[] = [
@@ -16,63 +15,56 @@ const updates: Update[] = [
     title: "Smarter, Faster, More Capable",
     body: "Improved voice accuracy, faster tool calling, and a brand new memory system.",
     tags: [{ label: "release" }, { label: "changelog" }],
-    badge: "LATEST",
+    variant: "latest",
+    badgeLabel: "LATEST",
   },
   {
     date: "May 15, 2026",
     title: "Introducing Skills SDK",
     body: "Build custom skills and extend with your own tools and logic.",
     tags: [{ label: "development" }],
+    variant: "dev",
+    badgeLabel: "DEV",
   },
   {
     date: "May 05, 2026",
     title: "Local Models Support",
-    body: "Run Yumi with local LLMs for complete privacy and control.",
+    body: "Run Yumii with local LLMs for complete privacy and control.",
     tags: [{ label: "feature" }],
+    variant: "feat",
+    badgeLabel: "FEAT",
   },
 ];
 
+const badgeClass: Record<Update["variant"], string> = {
+  latest: "badge badge-latest",
+  dev: "badge badge-dev",
+  feat: "badge badge-feat",
+};
+
 export function Updates() {
   return (
-    <section className="updates-section w-full" data-purpose="updates-section">
-      <div className="updates-header flex items-center justify-between mb-6">
-        <h2 className="updates-title text-xl md:text-2xl font-bold flex items-center gap-2 font-display">
-          <ArrowRightIcon className="w-5 h-5 text-primary" />
-          Latest Updates
-        </h2>
-        <a
-          href="#"
-          className="updates-link text-sm text-primary hover:underline flex items-center gap-1 font-medium"
-        >
-          Read all
-          <ArrowLongRightIcon className="w-4 h-4" />
+    <section className="section" data-purpose="updates-section">
+      <div className="section-header">
+        <div className="section-title">
+          <span className="emoji">🌿</span> Latest Updates
+        </div>
+        <a href="#" className="section-link">
+          Read all →
         </a>
       </div>
-      <div className="updates-grid grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="updates-grid">
         {updates.map((update) => (
-          <div
-            key={update.title}
-            className="update-card bg-surface-container/50 border border-outline-variant rounded-xl p-6 flex flex-col h-full hover:bg-surface-container transition-colors"
-          >
-            <div className="update-header flex items-center gap-3 mb-3">
-              {update.badge ? (
-                <span className="update-badge bg-primary text-on-primary text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded">
-                  {update.badge}
-                </span>
-              ) : null}
-              <span className="update-date text-on-surface-variant text-sm">{update.date}</span>
+          <div key={update.title} className="update-card">
+            <div className="update-badge">
+              <span className={badgeClass[update.variant]}>{update.badgeLabel}</span>
+              <span className="update-date">{update.date}</span>
             </div>
-            <h3
-              className="update-title font-bold text-lg mb-2 text-on-surface"
-              dangerouslySetInnerHTML={{ __html: update.title.replace(/(.{1,18})\/(.{1,18})/, "$1<br/>$2") }}
-            />
-            <p className="update-description text-on-surface-variant text-sm mb-6 flex-grow">{update.body}</p>
-            <div className="update-tags flex gap-2 mt-auto">
+            <div className="update-title">{update.title}</div>
+            <div className="update-desc">{update.body}</div>
+            <div className="update-tags">
               {update.tags.map((tag) => (
-                <span
-                  key={tag.label}
-                  className="tag text-xs text-primary border border-primary/30 bg-primary/10 px-2 py-1 rounded"
-                >
+                <span key={tag.label} className="update-tag">
                   {tag.label}
                 </span>
               ))}

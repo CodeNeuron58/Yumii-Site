@@ -1,4 +1,6 @@
+import { Background } from "./Background";
 import { Features } from "./Features";
+import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { Integrations } from "./Integrations";
@@ -8,7 +10,8 @@ import { Updates } from "./Updates";
 
 export function Landing() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 flex flex-col gap-12 md:gap-24 relative">
+    <>
+      <Background />
       <Header />
       <Hero />
       <QuickStart />
@@ -16,6 +19,7 @@ export function Landing() {
       <Testimonials />
       <Updates />
       <Integrations />
-    </div>
+      <Footer />
+    </>
   );
 }

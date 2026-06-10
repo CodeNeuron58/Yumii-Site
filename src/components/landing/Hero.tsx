@@ -1,121 +1,90 @@
-import Image from "next/image";
-import {
-  ArrowRightIcon,
-  BoltIcon,
-  CodeIcon,
-  GithubIcon,
-  LockIcon,
-  MicrophoneIcon,
-  TerminalIcon,
-} from "./icons";
+"use client";
+
+import { useEffect, useState } from "react";
 
 const badges = [
-  { label: "Terminal Native", Icon: TerminalIcon },
-  { label: "Voice First", Icon: MicrophoneIcon },
-  { label: "Local & Private", Icon: LockIcon },
-  { label: "Extensible", Icon: BoltIcon },
-  { label: "Open Source", Icon: CodeIcon },
+  { label: "Terminal Native", icon: "⬛" },
+  { label: "Voice First", icon: "🎙️" },
+  { label: "Local & Private", icon: "🔒" },
+  { label: "Extensible", icon: "🧩" },
+  { label: "Open Source", icon: "</>" },
 ];
 
 export function Hero() {
+  const [mascotSrc, setMascotSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/yumi-hero.png")
+      .then((res) => res.blob())
+      .then((blob) => {
+        if (cancelled) return;
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          if (!cancelled && typeof reader.result === "string") {
+            setMascotSrc(reader.result);
+          }
+        };
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => {
+        // Fall back to plain src if FileReader fails
+        if (!cancelled) setMascotSrc("/yumi-hero.png");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
-    <main className="hero-section flex flex-col items-center text-center mt-8 md:mt-16 w-full z-10">
-      {/* ── Mascot with Halo Glow Ring ─────────────────────────────── */}
-      <div className="hero-mascot-wrapper relative mx-auto mb-8 flex items-center justify-center w-48 h-48 sm:w-64 sm:h-64">
+    <section className="hero section" data-purpose="hero-section">
+      {/* eslint-disable-next-line @next/next/no-img-element -- data URL is loaded at runtime, can't use next/image */}
+      <img
+        src={mascotSrc ?? "/yumi-hero.png"}
+        alt="Yumii AI companion"
+        width={220}
+        height={220}
+        className="hero-mascot animate-mascot-float"
+        style={{ filter: "drop-shadow(0 0 40px rgba(63,185,80,0.3))" }}
+      />
 
-        {/* Layer 1 – Far outer bloom (slow-breathing radial glow) */}
-        <div
-          className="absolute rounded-full pointer-events-none animate-halo-breathe"
-          style={{
-            inset: "-72px",
-            background:
-              "radial-gradient(circle, rgba(107,251,154,0.09) 0%, rgba(107,251,154,0.04) 40%, transparent 70%)",
-          }}
-        />
-
-        {/* Layer 2 – Counter-rotating dashed ring (far, subtle) */}
-        <div
-          className="absolute rounded-full pointer-events-none animate-halo-counter-spin"
-          style={{
-            inset: "-20px",
-            border: "1px dashed rgba(107,251,154,0.18)",
-          }}
-        />
-
-        {/* Layer 3 – Rotating conic-gradient arc (the sweeping bright light) */}
-        <div
-          className="absolute rounded-full pointer-events-none animate-halo-spin"
-          style={{
-            inset: "-5px",
-            padding: "3px",
-            background:
-              "conic-gradient(from 0deg, transparent 0%, rgba(107,251,154,0.05) 15%, rgba(107,251,154,0.95) 38%, #6bfb9a 50%, rgba(107,251,154,0.95) 62%, rgba(107,251,154,0.05) 80%, transparent 100%)",
-            /* Mask trick: show only the 3px padding ring, not the interior */
-            WebkitMask:
-              "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            WebkitMaskComposite: "destination-out",
-            maskComposite: "exclude",
-          }}
-        />
-
-        {/* Layer 4 – Inner pulsing glow ring (tight to image edge) */}
-        <div
-          className="absolute rounded-full pointer-events-none animate-halo-pulse-glow"
-          style={{
-            inset: "-1px",
-            border: "1.5px solid rgba(107,251,154,0.45)",
-          }}
-        />
-
-        {/* Mascot image – circular clip + mint drop-shadow */}
-        <Image
-          src="/yumi-hero.png"
-          alt="Yumi AI companion"
-          width={256}
-          height={256}
-          priority
-          className="relative z-10 w-full h-full object-cover rounded-full"
-          style={{ filter: "drop-shadow(0 0 14px rgba(107,251,154,0.28))" }}
-        />
-      </div>
-
-      <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-surface max-w-3xl leading-[1.1] font-display">
-        Your <span className="text-primary">AI companion</span>
+      <h1 className="hero-title">
+        Your <span>AI companion</span>
         <br />
         that lives in the terminal.
       </h1>
 
-      <p className="hero-subtitle mt-6 text-lg sm:text-xl text-on-surface-variant max-w-2xl mx-auto">
-        Real-time voice interaction, tool calling, and persistent memory.
-        <br className="hidden sm:block" />
-        Built for developers. Designed for productivity.
+      <p className="hero-subtitle">
+        Real-time voice interaction, tool calling, and persistent memory. Built for
+        developers. Designed for productivity.
       </p>
 
-      <div className="hero-cta-group mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4">
-        <a
-          href="#"
-          className="cta-button-primary w-full sm:w-auto flex items-center justify-center gap-2 bg-primary text-on-primary hover:bg-primary/90 px-8 py-3.5 rounded-full text-base font-semibold transition-colors shadow-lg shadow-primary/20"
-        >
-          Get Started
-          <ArrowRightIcon className="w-4 h-4" />
+      <div className="hero-buttons">
+        <a href="#" className="btn-primary">
+          Get Started →
         </a>
-        <a
-          href="#"
-          className="cta-button-secondary w-full sm:w-auto flex items-center justify-center gap-2 bg-surface-container text-on-surface hover:bg-surface-container-high px-8 py-3.5 rounded-full text-base font-medium transition-colors border border-outline-variant"
-        >
+        <a href="#" className="btn-outline">
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
           View on GitHub
-          <GithubIcon className="w-5 h-5" />
         </a>
       </div>
 
-      <div className="hero-badges mt-12 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-on-surface-variant">
-        {badges.map(({ label, Icon }) => (
-          <div key={label} className="badge-item flex items-center gap-2">
-            <Icon className="w-4 h-4 text-primary" />
+      <div className="feature-pills">
+        {badges.map(({ label, icon }) => (
+          <span key={label} className="pill">
+            <span className="pill-icon">{icon}</span>
             {label}
-          </div>
+          </span>
         ))}
       </div>
-    </main>
+    </section>
   );
 }

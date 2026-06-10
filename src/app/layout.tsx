@@ -1,28 +1,30 @@
-﻿import type { Metadata } from "next";
-import { Space_Grotesk, Geist, Geist_Mono } from "next/font/google";
+import type { Metadata } from "next";
+import { Fredoka, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const geist = Geist({
-  variable: "--font-geist",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "YUMI - AI Companion",
+  title: "Yumii - Your AI Companion That Lives in the Terminal",
   description:
     "Real-time voice interaction, tool calling, and persistent memory. Built for developers. Designed for productivity.",
 };
@@ -33,9 +35,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${spaceGrotesk.variable} ${geist.variable} ${geistMono.variable} font-body bg-background text-on-surface min-h-screen antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary`}
+        className={`${fredoka.variable} ${inter.variable} ${jetbrainsMono.variable} font-body bg-background text-on-surface min-h-screen antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary`}
       >
         {children}
       </body>
