@@ -583,36 +583,24 @@
     color: var(--color-primary);
   }
 
-  /* Testimonials */
-  .testi-text {
-    font-size: 13px;
-    color: var(--color-on-surface-variant);
-    line-height: 1.6;
-    margin-bottom: 14px;
-    font-style: italic;
+  /* Attribution (replaces testimonials) */
+  .attribution-section {
+    text-align: center;
+    padding-top: 8px;
   }
-  .testi-author {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .testi-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--color-surface-alt);
-    border: 2px solid var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .attribution-body {
     font-size: 16px;
-    overflow: hidden;
-    flex-shrink: 0;
+    line-height: 1.7;
+    color: var(--color-on-surface-variant);
+    max-width: 640px;
+    margin: 0 auto 24px;
   }
-  .testi-handle {
-    font-size: 13px;
-    color: var(--color-primary);
-    font-weight: 500;
+  .attribution-body strong {
+    color: var(--color-on-surface);
+    font-weight: 600;
+  }
+  .attribution-cta {
+    display: inline-flex;
   }
 
   /* Updates */
@@ -716,7 +704,6 @@
       display: none;
     }
     .features-grid,
-    .testimonials-grid,
     .updates-grid {
       grid-template-columns: 1fr;
     }

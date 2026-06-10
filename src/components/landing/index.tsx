@@ -1,3 +1,4 @@
+import { Attribution } from "./Attribution";
 import { Background } from "./Background";
 import { Features } from "./Features";
 import { Footer } from "./Footer";
@@ -5,7 +6,6 @@ import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { Integrations } from "./Integrations";
 import { QuickStart } from "./QuickStart";
-import { Testimonials } from "./Testimonials";
 import { Updates } from "./Updates";
 
 export function Landing() {
@@ -16,7 +16,7 @@ export function Landing() {
       <Hero />
       <QuickStart />
       <Features />
-      <Testimonials />
+      <Attribution />
       <Updates />
       <Integrations />
       <Footer />
