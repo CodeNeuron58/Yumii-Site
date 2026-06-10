@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   title: "Yumii - Your AI Companion That Lives in the Terminal",
   description:
     "Real-time voice interaction, tool calling, and persistent memory. Built for developers. Designed for productivity.",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({

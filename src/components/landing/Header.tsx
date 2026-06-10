@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
@@ -12,7 +13,14 @@ export function Header() {
   return (
     <nav className="header-wrapper" data-purpose="header">
       <Link href="#" className="nav-logo" aria-label="Yumii home">
-        <span aria-hidden="true">🌿</span>
+        <Image
+          src="/yumi-logo.png"
+          alt=""
+          width={32}
+          height={32}
+          priority
+          className="nav-logo-mark"
+        />
         <span>YUMII</span>
       </Link>
 

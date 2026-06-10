@@ -19,13 +19,20 @@ nav.header-wrapper {
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-fredoka), "Fredoka", system-ui, sans-serif;
   font-weight: 600;
   font-size: 20px;
   color: var(--color-green-soft);
   letter-spacing: 0.05em;
   text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  flex-shrink: 0;
 }
 
 .nav-links {
