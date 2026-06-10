@@ -2,44 +2,47 @@
 
 import { useState } from "react";
 
-const installers: Array<{ id: string; label: string; command: string; note: string }> = [
-  {
-    id: "one-liner",
-    label: "One-liner",
-    command: "curl -fsSL https://yumi.sh/install.sh | bash",
-    note: "Works on macOS, Linux, and Windows. Requires Node.js 18+.",
-  },
-  {
-    id: "npm",
-    label: "npm",
-    command: "npm install -g @yumi/cli",
-    note: "Requires Node.js 18+. Ships with the yumi launcher script.",
-  },
-  {
-    id: "homebrew",
-    label: "Homebrew",
-    command: "brew install yumi-ai/tap/yumi",
-    note: "macOS or Linuxbrew. Adds yumi to your PATH automatically.",
-  },
-  {
-    id: "macos",
-    label: "macOS",
-    command: "curl -fsSL https://yumi.sh/install.sh | bash",
-    note: "Apple silicon and Intel builds. Signed and notarized.",
-  },
-  {
-    id: "linux",
-    label: "Linux",
-    command: "curl -fsSL https://yumi.sh/install.sh | bash",
-    note: "Tested on Ubuntu 22.04+, Fedora 39+, and Arch.",
-  },
+type Installer = {
+  id: string;
+  label: string;
+  commandLines: string[];
+  note: string;
+};
+
+const installers: Installer[] = [
   {
     id: "windows",
     label: "Windows",
-    command: "irm https://yumi.sh/install.ps1 | iex",
-    note: "Windows 10+ with PowerShell 7. WSL2 recommended.",
+    commandLines: [
+      "irm https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.ps1 | iex",
+    ],
+    note:
+      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
+  },
+  {
+    id: "unix",
+    label: "macOS / Linux",
+    commandLines: [
+      "curl -LsSf https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.sh | sh",
+    ],
+    note:
+      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
+  },
+  {
+    id: "source",
+    label: "From source",
+    commandLines: [
+      "git clone https://github.com/CodeNeuron58/Yumii.git",
+      "cd Yumii",
+      "uv sync",
+      "yumii wake-up",
+    ],
+    note:
+      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
   },
 ];
+
+const COMMENT = "# Get Yumii up and running in seconds";
 
 export function QuickStart() {
   const [activeId, setActiveId] = useState(installers[0].id);
@@ -48,7 +51,7 @@ export function QuickStart() {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(active.command);
+      await navigator.clipboard.writeText(active.commandLines.join("\n"));
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
@@ -62,12 +65,14 @@ export function QuickStart() {
         <div className="section-title">
           <span className="emoji">🌿</span> Quick Start
         </div>
-        <a href="#" className="section-link">
+        <a href="/docs/install" className="section-link">
           All Installation Options →
         </a>
       </div>
 
       <div className="code-card">
+        <span className="badge-beta">BETA</span>
+
         <div className="code-tabs">
           {installers.map((item) => (
             <button
@@ -79,15 +84,22 @@ export function QuickStart() {
               {item.label}
             </button>
           ))}
-          <span className="badge-beta">BETA</span>
         </div>
 
         <div className="code-body">
-          <div className="code-comment"># Get Yumii up and running in seconds</div>
-          <div className="code-line">
-            <span className="code-prompt">$</span>
-            <span>{active.command}</span>
-          </div>
+          <div className="code-comment">{COMMENT}</div>
+          {active.commandLines.map((line, idx) =>
+            idx === 0 ? (
+              <div className="code-line" key={idx}>
+                <span className="code-prompt">$</span>
+                <span>{line}</span>
+              </div>
+            ) : (
+              <div className="code-line code-line-continuation" key={idx}>
+                <span>{line}</span>
+              </div>
+            )
+          )}
           <button
             type="button"
             className="copy-btn"

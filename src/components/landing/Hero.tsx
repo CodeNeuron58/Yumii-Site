@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 const badges = [
-  { label: "Terminal Native", icon: "⬛" },
   { label: "Voice First", icon: "🎙️" },
+  { label: "Live2D Avatar", icon: "🎭" },
   { label: "Local & Private", icon: "🔒" },
-  { label: "Extensible", icon: "🧩" },
-  { label: "Open Source", icon: "</>" },
+  { label: "Persistent Memory", icon: "🧠" },
+  { label: "Tool Calling", icon: "🛠️" },
 ];
 
 export function Hero() {
@@ -49,14 +49,13 @@ export function Hero() {
       />
 
       <h1 className="hero-title">
-        Your <span>AI companion</span>
+        Your AI companion with a <span>voice</span> and a <span>face</span>.
         <br />
-        that lives in the terminal.
       </h1>
 
       <p className="hero-subtitle">
-        Real-time voice interaction, tool calling, and persistent memory. Built for
-        developers. Designed for productivity.
+        Yumii listens, speaks, and remembers. Live2D avatar, six personalities,
+        tool calling, local-first. Open source under MIT.
       </p>
 
       <div className="hero-buttons">
@@ -76,6 +75,10 @@ export function Hero() {
           View on GitHub
         </a>
       </div>
+
+      <p className="hero-honesty-strip">
+        v0.3.0 alpha — APIs will change. Runs on CPU. No GPU required.
+      </p>
 
       <div className="feature-pills">
         {badges.map(({ label, icon }) => (

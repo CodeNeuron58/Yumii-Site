@@ -218,13 +218,21 @@
     gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
   }
   .feature-pills {
     display: flex;
     gap: 8px;
     justify-content: center;
     flex-wrap: wrap;
+  }
+  .hero-honesty-strip {
+    color: var(--color-on-surface-variant);
+    font-size: 12px;
+    text-align: center;
+    margin: 0 auto 24px;
+    max-width: 560px;
+    line-height: 1.5;
   }
 
   /* Nav (sticky, blurs background content) */
@@ -317,13 +325,14 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    position: relative;
   }
   .code-tabs {
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-background);
-    padding: 0 16px;
+    padding: 0 60px 0 16px;
     gap: 4px;
     overflow-x: auto;
   }
@@ -359,6 +368,15 @@
     margin-left: 8px;
     flex-shrink: 0;
   }
+  .badge-beta.badge-beta-tabs {
+    margin-left: auto;
+  }
+  .code-card > .badge-beta {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+  }
   .code-body {
     padding: 20px 24px;
     position: relative;
@@ -376,6 +394,13 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    line-height: 1.5;
+  }
+  .code-line + .code-line {
+    margin-top: 2px;
+  }
+  .code-line-continuation {
+    padding-left: 18px;
   }
   .code-prompt {
     color: var(--color-primary);
