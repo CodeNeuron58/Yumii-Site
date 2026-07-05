@@ -1,238 +1,489 @@
-/* Card patterns and grids used across the section components.
-   Every card uses the same base (dark surface, border, hover lift +
-   green border). Variants override icon-box, inner spacing, and
-   decoration. */
+/* Section components. The orb is the recurring motif: four mini-orbs
+   act out her states, six tinted orbs are her moods, one closes the page. */
 
-/* Shared card shell */
-.feature-card,
-.update-card,
-.personality-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  transition: border-color 0.2s, transform 0.2s;
-}
-
-.feature-card:hover,
-.update-card:hover,
-.personality-card:hover {
-  border-color: var(--color-primary);
-  transform: translateY(-2px);
-}
-
-/* Features grid + cards */
-.features-grid {
+/* ── Presence strip: you speak → she thinks → answers → remembers ─── */
+.presence-strip {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 
-.feature-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--color-green-glow);
-  border: 1px solid var(--color-green-dim);
-  border-radius: 8px;
+.presence-step {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin-bottom: 12px;
-  color: var(--color-green-soft);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
 }
 
-.feature-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.feature-desc {
-  font-size: 13px;
-  color: var(--color-on-surface-variant);
-  line-height: 1.5;
-}
-
-/* Updates (changelog) */
-.updates-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.update-card {
+.step-orb {
   position: relative;
-  overflow: hidden;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    var(--color-aurora-a),
+    var(--color-aurora-b) 78%
+  );
+  box-shadow: 0 0 18px 2px rgba(0, 255, 136, 0.22);
 }
 
-.update-card::after {
+.step-orb::before {
   content: "";
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cpath d='M60 80 Q20 60 0 20 Q40 40 80 0 Z' fill='rgba(63,185,80,0.06)'/%3E%3C/svg%3E")
-    no-repeat center/contain;
+  inset: 0;
+  border-radius: 50%;
   pointer-events: none;
+  opacity: 0;
 }
 
-.update-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-  width: 100%;
+.step-orb[data-state="listening"]::before {
+  border: 1.5px solid rgba(0, 255, 136, 0.5);
+  animation: orbRing 1.4s ease-out infinite;
 }
 
-.update-version {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--color-green-soft);
-  background: var(--color-green-glow);
-  border: 1px solid var(--color-green-dim);
-  padding: 3px 8px;
-  border-radius: 999px;
-  letter-spacing: 0.04em;
-  line-height: 1;
+.step-orb[data-state="thinking"]::before {
+  opacity: 1;
+  border: 1.5px solid transparent;
+  border-top-color: var(--color-aurora-a);
+  border-right-color: var(--color-aurora-b);
+  animation: orbSpin 1s linear infinite;
 }
 
-.update-date {
-  font-size: 11px;
-  color: var(--color-text-dim);
+.step-orb[data-state="speaking"] {
+  animation: orbTalk 0.85s ease-in-out infinite;
+}
+
+.step-orb[data-state="idle"] {
+  animation: orbBreathe 4s ease-in-out infinite;
+}
+
+.step-label {
+  font-family: var(--font-display);
+  font-size: 19px;
   font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.update-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  line-height: 1.35;
   color: var(--color-on-surface);
 }
 
-.update-bullets {
+.step-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant);
+}
+
+/* ── Faces: the app and the terminal ──────────────────────────────── */
+.faces-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.face-card {
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  padding: 26px;
+  transition: border-color 0.25s;
+}
+
+.face-card:hover {
+  border-color: rgba(61, 220, 151, 0.35);
+}
+
+.face-visual {
+  height: 168px;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-DEFAULT);
+  background: var(--color-background);
+  margin-bottom: 22px;
+  overflow: hidden;
+  position: relative;
+}
+
+.face-visual-app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-window {
+  width: 132px;
+  height: 122px;
+  border-radius: 16px;
+  border: 1px solid var(--color-outline);
+  background: rgba(16, 29, 22, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.mini-orb {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    var(--color-aurora-a),
+    var(--color-aurora-b) 75%
+  );
+  box-shadow: 0 0 16px 3px rgba(0, 255, 136, 0.3);
+  animation: orbBreathe 4s ease-in-out infinite;
+}
+
+.mini-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--color-text-dim);
+}
+
+.face-visual-term {
+  display: flex;
+  flex-direction: column;
+}
+
+.term-chrome {
+  display: flex;
+  gap: 6px;
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.term-chrome span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-outline);
+}
+
+.term-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.term-line {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.term-prompt {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.term-banner {
+  color: var(--color-green-soft);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+}
+
+.term-dim {
+  color: var(--color-text-dim);
+}
+
+.face-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.face-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--color-on-surface);
+}
+
+.face-for {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.face-points {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
-.update-bullets li {
-  font-size: 13px;
+.face-points li {
+  font-size: 14px;
   color: var(--color-on-surface-variant);
-  line-height: 1.5;
-  padding-left: 16px;
+  line-height: 1.6;
+  padding-left: 18px;
   position: relative;
 }
 
-.update-bullets li::before {
+.face-points li::before {
   content: "›";
   color: var(--color-primary);
   position: absolute;
   left: 0;
   top: 0;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* Personality */
-.personality-grid {
+/* ── Privacy: the quiet centerpiece ───────────────────────────────── */
+.privacy-wrap {
+  border: 1px solid var(--color-outline);
+  border-radius: var(--radius-2xl);
+  background:
+    radial-gradient(
+      ellipse at 50% -20%,
+      rgba(0, 255, 136, 0.06),
+      transparent 60%
+    ),
+    var(--color-surface);
+  padding: 56px 48px;
+  text-align: center;
+}
+
+.privacy-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.12;
+  color: var(--color-on-surface);
+  margin: 0 0 40px;
+  text-wrap: balance;
+}
+
+.privacy-title em {
+  font-style: italic;
+  color: var(--color-green-soft);
+}
+
+.privacy-rows {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 28px;
+  text-align: left;
+  margin-bottom: 34px;
 }
 
-.personality-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+.privacy-item {
+  border-top: 1px solid var(--color-outline-variant);
+  padding-top: 16px;
 }
 
-.personality-icon-box {
-  width: 36px;
-  height: 36px;
-  background: var(--color-green-glow);
-  border: 1px solid var(--color-green-dim);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  line-height: 1;
-}
-
-.personality-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--color-on-surface);
-  line-height: 1.2;
-}
-
-.personality-mood {
-  font-size: 12px;
-  color: var(--color-on-surface-variant);
-  line-height: 1.4;
-}
-
-/* Attribution (the project's open-source invitation, replaces the old
-   testimonials block) */
-.attribution-body {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--color-on-surface-variant);
-  max-width: 640px;
-  margin: 0 auto 24px;
-  text-align: center;
-}
-
-.attribution-body strong {
-  color: var(--color-on-surface);
+.privacy-item-title {
   font-weight: 600;
+  font-size: 15px;
+  color: var(--color-on-surface);
+  margin-bottom: 6px;
 }
 
-.attribution-cta {
-  display: inline-flex;
-  text-align: center;
+.privacy-item-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant);
 }
 
-/* Integrations (8x2 emoji grid) */
-.integrations-grid {
+.privacy-foot {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: var(--color-text-dim);
+}
+
+.privacy-foot a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.privacy-foot a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ── Capabilities: hairline rows, not cards ───────────────────────── */
+.capability-grid {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+}
+
+.capability {
+  border-top: 1px solid var(--color-outline-variant);
+  padding: 26px 0 30px;
+}
+
+.capability-title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--color-on-surface);
   margin-bottom: 8px;
 }
 
-.integration-item {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-DEFAULT);
-  padding: 10px 8px;
-  text-align: center;
-  font-size: 12px;
+.capability-desc {
+  font-size: 14.5px;
+  line-height: 1.65;
   color: var(--color-on-surface-variant);
-  font-weight: 500;
-  cursor: default;
-  transition: border-color 0.2s, color 0.2s;
+  max-width: 40ch;
+}
+
+/* ── Personalities: six tinted orbs ───────────────────────────────── */
+.personality-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.personality-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  text-align: center;
+  gap: 12px;
 }
 
-.integration-item:hover {
-  border-color: var(--color-primary);
+.p-orb {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  /* Tint comes inline from data via --p-tint */
+  background: radial-gradient(
+    circle at 32% 28%,
+    var(--p-tint, var(--color-aurora-a)),
+    color-mix(in srgb, var(--p-tint, var(--color-aurora-a)) 45%, #041008) 82%
+  );
+  box-shadow: 0 0 20px 2px
+    color-mix(in srgb, var(--p-tint, var(--color-aurora-a)) 32%, transparent);
+  animation: orbBreathe 4s ease-in-out infinite;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.personality-item:hover .p-orb {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px 6px
+    color-mix(in srgb, var(--p-tint, var(--color-aurora-a)) 45%, transparent);
+}
+
+.p-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
   color: var(--color-on-surface);
 }
 
-.integration-icon {
-  font-size: 20px;
+.p-mood {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--color-text-dim);
+}
+
+/* ── Updates: quiet timeline ──────────────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 22px 0;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.timeline-version {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.04em;
+}
+
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-dim);
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-on-surface);
+  margin-bottom: 4px;
+}
+
+.timeline-summary {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-on-surface-variant);
+  max-width: 60ch;
+}
+
+/* ── Closing invitation ───────────────────────────────────────────── */
+.closing {
+  text-align: center;
+}
+
+.closing .sec-eyebrow {
+  margin-bottom: 22px;
+}
+
+.closing-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(30px, 4.6vw, 48px);
+  line-height: 1.12;
+  color: var(--color-on-surface);
+  margin: 0 auto 18px;
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+.closing-title em {
+  font-style: italic;
+  color: var(--color-green-soft);
+}
+
+.closing-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-on-surface-variant);
+  max-width: 520px;
+  margin: 0 auto 34px;
+}
+
+.closing-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .privacy-wrap {
+    padding: 40px 24px;
+  }
 }

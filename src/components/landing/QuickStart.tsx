@@ -23,18 +23,27 @@ export function QuickStart() {
   };
 
   return (
-    <section className="section" data-purpose="quick-start-section">
-      <div className="section-header">
-        <div className="section-title">
-          <span className="emoji">🌿</span> Quick Start
-        </div>
-        <a href="/docs/install" className="section-link">
-          All Installation Options →
+    <section
+      className="section"
+      id="quickstart"
+      data-purpose="quick-start-section"
+    >
+      <hr className="sec-rule" />
+      <p className="sec-eyebrow">Bring her home</p>
+      <div className="sec-head-row">
+        <h2 className="sec-title">
+          Two minutes, <em>and she&apos;s yours</em>.
+        </h2>
+        <a href="/docs/install" className="sec-link">
+          all install options →
         </a>
       </div>
+      <p className="sec-lede">
+        Runs on Windows, macOS and Linux — an everyday laptop is plenty.
+      </p>
 
       <div className="code-card">
-        <span className="badge-beta">BETA</span>
+        <span className="badge-beta">ALPHA</span>
 
         <div className="code-tabs">
           {installers.map((item) => (

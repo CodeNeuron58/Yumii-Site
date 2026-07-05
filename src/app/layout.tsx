@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Fredoka, Inter, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -24,9 +25,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yumii - Your AI Companion That Lives in the Terminal",
+  title: "Yumii — Your AI Companion, Living on Your Desktop",
   description:
-    "Real-time voice interaction, tool calling, and persistent memory. Built for developers. Designed for productivity.",
+    "A small glowing orb that stays with you. Talk to Yumii anytime — she listens, speaks, remembers you, and gets things done. Private by design: everything stays on your machine. Free & open source.",
   icons: {
     icon: [{ url: "/icon.png", type: "image/png" }],
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
@@ -41,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${fredoka.variable} ${inter.variable} ${jetbrainsMono.variable} font-body bg-background text-on-surface min-h-screen antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary`}
+        className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} font-body bg-background text-on-surface min-h-screen antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary`}
       >
         {children}
       </body>

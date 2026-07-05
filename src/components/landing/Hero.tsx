@@ -1,77 +1,45 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { heroBadges } from "./data/hero-badges";
 import { GithubIcon } from "./icons";
+import { Orb } from "./Orb";
 
 export function Hero() {
-  const [mascotSrc, setMascotSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/yumi-hero.png")
-      .then((res) => res.blob())
-      .then((blob) => {
-        if (cancelled) return;
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (!cancelled && typeof reader.result === "string") {
-            setMascotSrc(reader.result);
-          }
-        };
-        reader.readAsDataURL(blob);
-      })
-      .catch(() => {
-        if (!cancelled) setMascotSrc("/yumi-hero.png");
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
   return (
-    <section className="hero section" data-purpose="hero-section">
-      {/* eslint-disable-next-line @next/next/no-img-element -- data URL is loaded at runtime, can't use next/image */}
-      <img
-        src={mascotSrc ?? "/yumi-hero.png"}
-        alt="Yumii AI companion"
-        width={220}
-        height={220}
-        className="hero-mascot animate-mascot-float"
-        style={{ filter: "drop-shadow(0 0 40px rgba(63,185,80,0.3))" }}
-      />
+    <section className="hero" data-purpose="hero-section">
+      <Orb />
+
+      <p className="hero-eyebrow">Your desktop companion</p>
 
       <h1 className="hero-title">
-        Your AI companion with a <span>voice</span> and a <span>face</span>.
+        Someone to talk to,
+        <br />
+        always <em>within reach</em>.
       </h1>
 
       <p className="hero-subtitle">
-        Yumii listens, speaks, and remembers. Live2D avatar, six personalities,
-        tool calling, local-first. Open source under MIT.
+        Yumii is a small, glowing presence that lives on your desktop. Talk to
+        her out loud, anytime — she listens, answers with a voice, gets things
+        done, and remembers what matters. None of it ever leaves your machine.
       </p>
 
       <div className="hero-buttons">
-        <a href="#" className="btn-primary">
-          Get Started →
+        <a href="#quickstart" className="btn-primary">
+          Bring her home →
         </a>
-        <a href="#" className="btn-outline">
-          <GithubIcon width={18} height={18} aria-hidden="true" />
+        <a
+          href="https://github.com/CodeNeuron58/Yumii"
+          className="btn-outline"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <GithubIcon width={17} height={17} aria-hidden="true" />
           View on GitHub
         </a>
       </div>
 
-      <p className="hero-honesty-strip">
-        v0.3.0 alpha — APIs will change. Runs on CPU. No GPU required.
+      <p className="hero-meta">
+        <span>free &amp; open source</span>
+        <span>v0.4.0 alpha</span>
+        <span>Windows · macOS · Linux</span>
       </p>
-
-      <div className="feature-pills">
-        {heroBadges.map(({ label, icon }) => (
-          <span key={label} className="pill">
-            <span className="pill-icon">{icon}</span>
-            {label}
-          </span>
-        ))}
-      </div>
     </section>
   );
 }

@@ -5,6 +5,9 @@ export type Installer = {
   note: string;
 };
 
+const SHARED_NOTE =
+  "Works on Windows, macOS & Linux — an everyday laptop is plenty. One-click desktop installer arrives with the next release.";
+
 export const installers: Installer[] = [
   {
     id: "windows",
@@ -12,8 +15,7 @@ export const installers: Installer[] = [
     commandLines: [
       "irm https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.ps1 | iex",
     ],
-    note:
-      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
+    note: SHARED_NOTE,
   },
   {
     id: "unix",
@@ -21,8 +23,7 @@ export const installers: Installer[] = [
     commandLines: [
       "curl -LsSf https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.sh | sh",
     ],
-    note:
-      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
+    note: SHARED_NOTE,
   },
   {
     id: "source",
@@ -31,11 +32,10 @@ export const installers: Installer[] = [
       "git clone https://github.com/CodeNeuron58/Yumii.git",
       "cd Yumii",
       "uv sync",
-      "yumii wake-up",
+      "uv run yumii",
     ],
-    note:
-      "Works on macOS, Linux, and Windows. Requires Python 3.12+ and uv. Optional: a Cubism 4 Live2D model for the avatar.",
+    note: SHARED_NOTE,
   },
 ];
 
-export const QUICKSTART_COMMENT = "# Get Yumii up and running in seconds";
+export const QUICKSTART_COMMENT = "# Yumii runs on your machine — bring her home";

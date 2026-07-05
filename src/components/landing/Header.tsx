@@ -3,9 +3,11 @@ import Link from "next/link";
 
 const navLinks = [
   { label: "Documentation", href: "/docs" },
-  { label: "Guide", href: "#" },
-  { label: "Changelog", href: "#" },
-  { label: "GitHub", href: "#" },
+  {
+    label: "Changelog",
+    href: "https://github.com/CodeNeuron58/Yumii/blob/master/CHANGELOG.md",
+  },
+  { label: "GitHub", href: "https://github.com/CodeNeuron58/Yumii" },
   { label: "Discord", href: "#" },
 ];
 
@@ -14,7 +16,7 @@ export function Header() {
     <nav className="header-wrapper" data-purpose="header">
       <Link href="#" className="nav-logo" aria-label="Yumii home">
         <Image
-          src="/yumi-logo.png"
+          src="/orb-logo.png"
           alt=""
           width={32}
           height={32}
@@ -32,7 +34,7 @@ export function Header() {
         ))}
       </ul>
 
-      <Link href="#" className="nav-cta">
+      <Link href="#quickstart" className="nav-cta">
         Get Started →
       </Link>
     </nav>
