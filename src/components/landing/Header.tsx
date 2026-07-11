@@ -8,35 +8,43 @@ const navLinks = [
     href: "https://github.com/CodeNeuron58/Yumii/blob/master/CHANGELOG.md",
   },
   { label: "GitHub", href: "https://github.com/CodeNeuron58/Yumii" },
-  { label: "Discord", href: "#" },
 ];
 
 export function Header() {
   return (
-    <nav className="header-wrapper" data-purpose="header">
-      <Link href="#" className="nav-logo" aria-label="Yumii home">
-        <Image
-          src="/orb-logo.png"
-          alt=""
-          width={32}
-          height={32}
-          priority
-          className="nav-logo-mark"
-        />
-        <span>YUMII</span>
-      </Link>
+    <header className="sticky top-0 z-40 border-b border-line-soft bg-night/75 backdrop-blur-md">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
+        <Link href="#" className="flex items-center gap-2.5" aria-label="Yumii home">
+          <Image
+            src="/orb-logo.png"
+            alt=""
+            width={28}
+            height={28}
+            priority
+            className="drop-shadow-[0_0_10px_rgba(46,230,170,0.45)]"
+          />
+          <span className="font-display text-lg font-semibold tracking-tight">
+            Yumii
+          </span>
+        </Link>
 
-      <ul className="nav-links">
-        {navLinks.map((link) => (
-          <li key={link.label}>
-            <Link href={link.href}>{link.label}</Link>
-          </li>
-        ))}
-      </ul>
+        <ul className="hidden items-center gap-8 text-[14.5px] text-ink-soft md:flex">
+          {navLinks.map((link) => (
+            <li key={link.label}>
+              <Link
+                href={link.href}
+                className="transition-colors hover:text-mint"
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-      <Link href="#quickstart" className="nav-cta">
-        Get Started →
-      </Link>
-    </nav>
+        <Link href="#quickstart" className="btn-primary !h-10 !px-5 text-sm">
+          Bring her home
+        </Link>
+      </nav>
+    </header>
   );
 }

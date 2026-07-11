@@ -1,87 +1,277 @@
 @import "tailwindcss";
-@import "./../styles/sections.css";
-@import "./../styles/layout.css";
-@import "./../styles/components.css";
-@import "./../styles/controls.css";
 
 /* ─────────────────────────────────────────────────────────────────────
-   Yumii — "a quiet room at night, with one living light in it."
-   Ground: deep green-black. Light: the orb's aurora (#00ff88 → #00b8d4).
-   Voice: Fraunces (display) · Inter (body) · JetBrains Mono (utility).
+   Yumii: "one living light in a dark room."
+   The whole identity derives from the orb asset itself:
+   pale aqua highlight → spring-green core → cyan rim, on green-black night.
+
+   Shape rule (locked): interactive elements are pills (radius-full),
+   containers are 16px (rounded-2xl). Nothing else.
+   Accent rule (locked): one accent family, the aurora (mint → cyan),
+   used identically on every section.
+   Theme: dark only. She is a glow; the page is the dark she glows in.
    ──────────────────────────────────────────────────────────────────── */
 
 @theme {
   /* Night ground */
-  --color-background: #07100c;
-  --color-surface: #0b1510;
-  --color-surface-alt: #101d16;
+  --color-night: #050f0a;
+  --color-pool: #08150f;
+  --color-pool-2: #0c1d15;
 
   /* Ink */
-  --color-on-background: #eaf6ef;
-  --color-on-surface: #eaf6ef;
-  --color-on-surface-variant: #9db8ab;
-  --color-text-dim: #5f7a6e;
+  --color-ink: #ecf7f1;
+  --color-ink-soft: #a9c4b7;
+  --color-ink-dim: #6f8d7e;
 
-  /* The one light: aurora greens */
-  --color-primary: #3ddc97;
-  --color-on-primary: #06231a;
-  --color-brand-green: #3ddc97;
-  --color-green-dim: #1d8a5e;
-  --color-green-soft: #8ff0c2;
-  --color-green-glow: rgba(61, 220, 151, 0.12);
-  --color-aurora-a: #00ff88;
-  --color-aurora-b: #00b8d4;
+  /* The aurora, sampled from the orb asset */
+  --color-mint: #3ee6a8;
+  --color-cyan: #2fd2e9;
+  --color-mint-deep: #073024;
+  --color-aqua-pale: #b9fbe9;
 
   /* Hairlines */
-  --color-outline: rgba(150, 255, 200, 0.1);
-  --color-outline-variant: rgba(150, 255, 200, 0.07);
-  --color-border: rgba(150, 255, 200, 0.1);
-
-  /* Radii */
-  --radius-none: 0;
-  --radius-sm: 0.125rem;
-  --radius-DEFAULT: 0.625rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.875rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.25rem;
-  --radius-3xl: 1.75rem;
-  --radius-full: 9999px;
-
-  /* Spacing */
-  --spacing-unit: 4px;
-  --spacing-gutter: 24px;
-  --spacing-margin-mobile: 20px;
-  --spacing-margin-desktop: 64px;
-  --spacing-container-max: 960px;
-  --spacing-prose-max: 620px;
+  --color-line: rgba(125, 232, 195, 0.12);
+  --color-line-soft: rgba(125, 232, 195, 0.07);
 
   /* Type */
-  --font-display: var(--font-fraunces), "Fraunces", Georgia, serif;
-  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui,
+    sans-serif;
+  --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace,
     monospace;
 }
 
 @layer base {
   html {
-    background-color: var(--color-background);
-    color: var(--color-on-background);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
+    background-color: var(--color-night);
+    color: var(--color-ink);
+    color-scheme: dark;
+    /* the orb's listening ripples scale past the viewport edge on
+       small screens; clip instead of creating horizontal scroll */
+    overflow-x: clip;
+  }
+  pre {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(125, 232, 195, 0.18) transparent;
+  }
+  pre::-webkit-scrollbar {
+    height: 8px;
+  }
+  pre::-webkit-scrollbar-thumb {
+    background: rgba(125, 232, 195, 0.18);
+    border-radius: 9999px;
+  }
+  pre::-webkit-scrollbar-track {
+    background: transparent;
   }
   body {
-    background-color: var(--color-background);
-    color: var(--color-on-surface);
-    font-family: var(--font-body);
-    font-size: 16px;
+    font-size: 16.5px;
     line-height: 1.65;
-    overflow-x: hidden;
   }
   ::selection {
-    background: var(--color-primary);
-    color: var(--color-on-primary);
+    background: var(--color-mint);
+    color: var(--color-mint-deep);
+  }
+}
+
+@layer components {
+  /* ── Buttons (pill, per shape rule) ────────────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    background: linear-gradient(120deg, var(--color-mint), #35dcc4);
+    color: var(--color-mint-deep);
+    font-weight: 600;
+    font-size: 15.5px;
+    white-space: nowrap;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s ease;
+    box-shadow: 0 0 0 rgba(62, 230, 168, 0);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 28px rgba(62, 230, 168, 0.28);
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    font-weight: 500;
+    font-size: 15.5px;
+    white-space: nowrap;
+    transition: border-color 0.25s ease, color 0.25s ease,
+      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-ghost:hover {
+    border-color: rgba(62, 230, 168, 0.45);
+    color: var(--color-mint);
+  }
+  .btn-ghost:active {
+    transform: scale(0.98);
+  }
+
+  /* ── The orb ───────────────────────────────────────────────────────
+     A faithful CSS rendition of the product: highlight upper-left,
+     spring-green core, cyan lower rim, soft aurora glow.
+     Size via --orb-size on .orb-stage. States via data-state.        */
+  .orb-stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: var(--orb-size, 250px);
+    aspect-ratio: 1;
+  }
+  .orb-stage:focus-visible {
+    outline: 2px solid var(--color-mint);
+    outline-offset: 10px;
+    border-radius: 50%;
+  }
+
+  .orb {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 33% 28%,
+      #b9fbe9 0%,
+      #62f2c4 18%,
+      #2ee6a0 42%,
+      #19c9d8 70%,
+      #0d9fc9 88%,
+      #0a86ad 100%
+    );
+    box-shadow: 0 0 calc(var(--orb-size, 250px) * 0.18)
+        rgba(46, 230, 170, 0.35),
+      0 0 calc(var(--orb-size, 250px) * 0.5) rgba(35, 200, 225, 0.22),
+      inset calc(var(--orb-size, 250px) * -0.07)
+        calc(var(--orb-size, 250px) * -0.1)
+        calc(var(--orb-size, 250px) * 0.2) rgba(4, 48, 62, 0.55),
+      inset calc(var(--orb-size, 250px) * 0.04)
+        calc(var(--orb-size, 250px) * 0.05)
+        calc(var(--orb-size, 250px) * 0.12) rgba(255, 255, 255, 0.25);
+    animation: orb-breathe 5.5s ease-in-out infinite;
+    transition: filter 0.5s ease;
+  }
+  /* soft specular highlight */
+  .orb::before {
+    content: "";
+    position: absolute;
+    top: 12%;
+    left: 17%;
+    width: 36%;
+    height: 27%;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgba(255, 255, 255, 0.6),
+      transparent 72%
+    );
+    filter: blur(4px);
+  }
+  /* thinking swirl (hidden unless thinking) */
+  .orb::after {
+    content: "";
+    position: absolute;
+    inset: 5%;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      transparent 0% 68%,
+      rgba(255, 255, 255, 0.3) 82%,
+      transparent 96%
+    );
+    filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  /* listening ripples */
+  .orb-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(62, 230, 190, 0.5);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .orb-ring-2 {
+    border-color: rgba(47, 210, 233, 0.4);
+  }
+
+  /* state wiring */
+  [data-state="listening"] .orb {
+    filter: brightness(1.08);
+  }
+  [data-state="listening"] .orb-ring {
+    animation: orb-ripple 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+  [data-state="listening"] .orb-ring-2 {
+    animation-delay: 0.9s;
+  }
+  [data-state="thinking"] .orb::after {
+    opacity: 1;
+    animation: orb-swirl 1.7s linear infinite;
+  }
+  [data-state="speaking"] .orb {
+    animation: orb-breathe 5.5s ease-in-out infinite,
+      orb-speak 0.85s ease-in-out infinite;
+  }
+
+  /* voice waveform (visible while speaking) */
+  .orb-wave {
+    position: absolute;
+    bottom: -14%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  [data-state="speaking"] .orb-wave {
+    opacity: 1;
+  }
+  .orb-wave span {
+    width: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(180deg, var(--color-mint), var(--color-cyan));
+    animation: orb-wavebar 0.9s ease-in-out infinite;
+  }
+  .orb-wave span:nth-child(1) { height: 45%; animation-delay: 0s; }
+  .orb-wave span:nth-child(2) { height: 80%; animation-delay: 0.15s; }
+  .orb-wave span:nth-child(3) { height: 100%; animation-delay: 0.3s; }
+  .orb-wave span:nth-child(4) { height: 70%; animation-delay: 0.45s; }
+  .orb-wave span:nth-child(5) { height: 50%; animation-delay: 0.6s; }
+
+  /* mood-tinted orb (Personality section: the orb really recolours) */
+  .orb-tinted {
+    background: radial-gradient(
+      circle at 33% 28%,
+      color-mix(in oklab, var(--p-tint) 25%, white) 0%,
+      var(--p-tint) 48%,
+      color-mix(in oklab, var(--p-tint) 45%, #052018) 100%
+    );
+    box-shadow: 0 0 22px color-mix(in oklab, var(--p-tint) 45%, transparent),
+      inset -5px -7px 14px rgba(0, 0, 0, 0.35),
+      inset 3px 4px 10px rgba(255, 255, 255, 0.28);
   }
 }
 
@@ -89,99 +279,81 @@
   .font-display {
     font-family: var(--font-display);
   }
-  .font-body {
-    font-family: var(--font-body);
-  }
+}
 
-  /* ── Ambient background: whisper-level stars + drifting leaves ──── */
-  .leaves-bg,
-  .stars {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
+/* ── Keyframes ─────────────────────────────────────────────────────── */
+@keyframes orb-breathe {
+  0%,
+  100% {
+    transform: scale(1);
   }
-  .leaf {
-    position: absolute;
-    bottom: -40px;
-    width: 18px;
-    height: 18px;
+  50% {
+    transform: scale(1.035);
+  }
+}
+@keyframes orb-ripple {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.55);
     opacity: 0;
-    animation: floatLeaf linear infinite;
-    will-change: transform, opacity;
   }
-  .leaf svg {
-    width: 100%;
-    height: 100%;
-    fill: var(--color-primary);
+}
+@keyframes orb-swirl {
+  to {
+    transform: rotate(360deg);
   }
-
-  .star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--color-green-soft);
-    border-radius: 50%;
+}
+@keyframes orb-speak {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.16);
+  }
+}
+@keyframes orb-wavebar {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes star-twinkle {
+  0%,
+  100% {
     opacity: 0;
-    animation: twinkle ease-in-out infinite;
   }
-
-  @keyframes floatLeaf {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.07;
-    }
-    90% {
-      opacity: 0.07;
-    }
-    100% {
-      transform: translateY(-110vh) rotate(360deg);
-      opacity: 0;
-    }
+  50% {
+    opacity: 0.5;
   }
-
-  @keyframes twinkle {
-    0%,
-    100% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.4;
-    }
+}
+@keyframes orb-float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
+  50% {
+    transform: translateY(-7px);
+  }
+}
 
-  /* ── Responsive ─────────────────────────────────────────────────── */
-  @media (max-width: 720px) {
-    .nav-links {
-      display: none;
-    }
-    .presence-strip {
-      grid-template-columns: 1fr 1fr;
-      row-gap: 40px;
-    }
-    .faces-grid,
-    .capability-grid {
-      grid-template-columns: 1fr;
-    }
-    .personality-row {
-      grid-template-columns: repeat(3, 1fr);
-      row-gap: 32px;
-    }
-    .privacy-rows {
-      grid-template-columns: 1fr;
-    }
-    .hero {
-      padding: 72px 20px 88px;
-    }
-    .section {
-      padding: 0 20px 96px;
-    }
-    .site-footer {
-      padding: 28px 20px;
-    }
+/* ── Reduced motion: the light holds still ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .orb,
+  .orb::after,
+  .orb-ring,
+  .orb-wave span,
+  .star-dot,
+  .float-gentle {
+    animation: none !important;
+  }
+  .orb-wave {
+    opacity: 0 !important;
   }
 }

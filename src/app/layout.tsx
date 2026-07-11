@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   display: "swap",
@@ -20,14 +19,14 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Yumii — Your AI Companion, Living on Your Desktop",
+  title: "Yumii, your desktop companion",
   description:
-    "A small glowing orb that stays with you. Talk to Yumii anytime — she listens, speaks, remembers you, and gets things done. Private by design: everything stays on your machine. Free & open source.",
+    "A small glowing orb that lives on your desktop. Talk to Yumii out loud: she listens, answers with a voice, remembers you, and gets things done. Free, open source, and private: nothing leaves your machine.",
   icons: {
     icon: [{ url: "/icon.png", type: "image/png" }],
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
@@ -42,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} font-body bg-background text-on-surface min-h-screen antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary`}
+        className={`${bricolage.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-body bg-night text-ink min-h-screen antialiased overflow-x-hidden`}
       >
         {children}
       </body>

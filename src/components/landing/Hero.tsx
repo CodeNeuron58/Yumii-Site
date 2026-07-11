@@ -1,45 +1,42 @@
-import { GithubIcon } from "./icons";
+import { GithubLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { Orb } from "./Orb";
+import { Reveal } from "./Reveal";
 
 export function Hero() {
   return (
-    <section className="hero" data-purpose="hero-section">
-      <Orb />
+    <section className="relative z-10 mx-auto grid max-w-6xl items-center gap-14 px-5 pt-16 pb-24 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:pt-20 lg:pb-32">
+      <Reveal>
+        <p className="mb-5 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-mint">
+          Your desktop companion
+        </p>
+        <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-ink md:text-5xl lg:text-6xl">
+          Someone to talk to,
+          <br />
+          always <em className="italic text-mint">within reach</em>.
+        </h1>
+        <p className="mt-6 max-w-[46ch] text-[17px] leading-relaxed text-ink-soft">
+          A small glowing presence on your desktop. Talk out loud; she
+          listens, answers, and remembers. Nothing ever leaves your machine.
+        </p>
+        <div className="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#quickstart" className="btn-primary">
+            Bring her home
+          </a>
+          <a
+            href="https://github.com/CodeNeuron58/Yumii"
+            className="btn-ghost"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <GithubLogoIcon size={18} aria-hidden="true" />
+            Star on GitHub
+          </a>
+        </div>
+      </Reveal>
 
-      <p className="hero-eyebrow">Your desktop companion</p>
-
-      <h1 className="hero-title">
-        Someone to talk to,
-        <br />
-        always <em>within reach</em>.
-      </h1>
-
-      <p className="hero-subtitle">
-        Yumii is a small, glowing presence that lives on your desktop. Talk to
-        her out loud, anytime — she listens, answers with a voice, gets things
-        done, and remembers what matters. None of it ever leaves your machine.
-      </p>
-
-      <div className="hero-buttons">
-        <a href="#quickstart" className="btn-primary">
-          Bring her home →
-        </a>
-        <a
-          href="https://github.com/CodeNeuron58/Yumii"
-          className="btn-outline"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <GithubIcon width={17} height={17} aria-hidden="true" />
-          View on GitHub
-        </a>
-      </div>
-
-      <p className="hero-meta">
-        <span>free &amp; open source</span>
-        <span>v0.4.0 alpha</span>
-        <span>Windows · macOS · Linux</span>
-      </p>
+      <Reveal delay={0.15} className="justify-self-center lg:justify-self-end lg:pr-8">
+        <Orb size={270} />
+      </Reveal>
     </section>
   );
 }

@@ -6,7 +6,7 @@ export type Installer = {
 };
 
 const SHARED_NOTE =
-  "Works on Windows, macOS & Linux — an everyday laptop is plenty. One-click desktop installer arrives with the next release.";
+  "Works on Windows, macOS and Linux. The one-click desktop installer arrives with the next release.";
 
 export const installers: Installer[] = [
   {
@@ -38,4 +38,4 @@ export const installers: Installer[] = [
   },
 ];
 
-export const QUICKSTART_COMMENT = "# Yumii runs on your machine — bring her home";
+export const QUICKSTART_COMMENT = "# Yumii runs on your machine";

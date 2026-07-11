@@ -7,7 +7,7 @@ export const capabilities: Capability[] = [
   {
     title: "Real conversation",
     body:
-      "Talk naturally, out loud. She answers with a real voice — and if you cut her off mid-sentence, she stops and listens.",
+      "Talk naturally, out loud. She answers with a real voice, and if you cut her off mid-sentence she stops and listens.",
   },
   {
     title: "Gets things done",
@@ -17,11 +17,11 @@ export const capabilities: Capability[] = [
   {
     title: "A memory that lasts",
     body:
-      "She learns the little things — your name, your projects, what you like — and still knows them tomorrow. Any conversation picks up where it left off.",
+      "She learns the little things: your name, your projects, what you like. Any conversation picks up where it left off.",
   },
   {
     title: "Your choice of mind and voice",
     body:
-      "Plug in the AI provider you already use — Groq, OpenAI, or Anthropic — and pick the voice she speaks with. Fully offline listening included.",
+      "Plug in the provider you already use and pick the voice she speaks with. Offline listening included.",
   },
 ];

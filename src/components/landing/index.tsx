@@ -16,15 +16,17 @@ export function Landing() {
     <>
       <Background />
       <Header />
-      <Hero />
-      <Presence />
-      <Faces />
-      <Privacy />
-      <Features />
-      <Personality />
-      <QuickStart />
-      <Updates />
-      <Attribution />
+      <main>
+        <Hero />
+        <Presence />
+        <Faces />
+        <Privacy />
+        <Features />
+        <Personality />
+        <QuickStart />
+        <Updates />
+        <Attribution />
+      </main>
       <Footer />
     </>
   );
