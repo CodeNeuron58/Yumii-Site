@@ -5,25 +5,18 @@ export type Installer = {
   note: string;
 };
 
-const SHARED_NOTE =
-  "Works on Windows, macOS and Linux. The one-click desktop installer arrives with the next release.";
-
 export const installers: Installer[] = [
   {
     id: "windows",
     label: "Windows",
-    commandLines: [
-      "irm https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.ps1 | iex",
-    ],
-    note: SHARED_NOTE,
+    commandLines: ["iex (irm https://yumii.me/install.ps1)"],
+    note: "Installs Yumii as a desktop app, right in your Start Menu. Re-run the command any time to update.",
   },
   {
     id: "unix",
     label: "macOS / Linux",
-    commandLines: [
-      "curl -LsSf https://raw.githubusercontent.com/CodeNeuron58/Yumii/master/install.sh | sh",
-    ],
-    note: SHARED_NOTE,
+    commandLines: ["curl -fsSL https://yumii.me/install.sh | bash"],
+    note: "Installs the backend today — the native desktop app for macOS and Linux is on the way.",
   },
   {
     id: "source",
@@ -32,9 +25,9 @@ export const installers: Installer[] = [
       "git clone https://github.com/CodeNeuron58/Yumii.git",
       "cd Yumii",
       "uv sync",
-      "uv run yumii",
+      "cd desktop && npx @tauri-apps/cli dev",
     ],
-    note: SHARED_NOTE,
+    note: "For developers — runs the desktop app straight from a clone.",
   },
 ];
 
