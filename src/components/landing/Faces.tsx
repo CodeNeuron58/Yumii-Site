@@ -2,21 +2,21 @@ import { OrbDot } from "./OrbDot";
 import { Reveal } from "./Reveal";
 
 /**
- * Two doors to the same companion: the desktop app for everyone, the
- * terminal for developers. The app preview is a live rendition of the
- * product (the orb really is the whole UI); the terminal is shown as an
- * honest command listing, not a fake window.
+ * The two real surfaces of the product: the orb you talk to, and the
+ * dashboard where you see everything she is. The orb preview is a live
+ * rendition (the orb really is the whole UI); the dashboard is shown as
+ * an honest listing of its actual tabs, not a fake window.
  */
-const appPoints = [
+const orbPoints = [
   "A small floating orb that sits quietly on top of your screen",
   "Summon her from anywhere with a hotkey, talk, then get back to it",
-  "One-click installer on the way",
+  "One command installs her — she lands in your Start Menu",
 ];
 
-const terminalPoints = [
-  "The full companion, living in your shell, nothing cut down",
-  "Sessions, memory and moods managed with quick slash-commands",
-  "Same brain, same memory as the app",
+const dashboardPoints = [
+  "Every conversation, resumable — she picks up where you left off",
+  "Her memory of you, in the open: browse it, edit it, delete it",
+  "Swap her mind, voice, ears, and personality anytime",
 ];
 
 export function Faces() {
@@ -27,13 +27,13 @@ export function Faces() {
           Meet her <em className="italic text-mint">where you live</em>.
         </h2>
         <p className="mt-4 max-w-[52ch] text-ink-soft">
-          One companion, one memory, reachable from the desktop or the
-          terminal. Whichever you open, she knows you.
+          The orb is the conversation. Behind it sits a dashboard where
+          nothing about her is hidden from you.
         </p>
       </Reveal>
 
       <div className="mt-14 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        {/* The desktop app */}
+        {/* The orb */}
         <Reveal className="min-w-0">
           <div className="h-full overflow-hidden rounded-2xl border border-line bg-pool">
             <div
@@ -57,14 +57,14 @@ export function Faces() {
             <div className="border-t border-line-soft p-7">
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="font-display text-xl font-semibold text-ink">
-                  The desktop app
+                  The orb
                 </h3>
                 <span className="font-mono text-xs text-ink-dim">
-                  for everyone
+                  the conversation
                 </span>
               </div>
               <ul className="mt-4 space-y-2.5 text-[15px] leading-relaxed text-ink-soft">
-                {appPoints.map((point) => (
+                {orbPoints.map((point) => (
                   <li key={point}>{point}</li>
                 ))}
               </ul>
@@ -72,37 +72,35 @@ export function Faces() {
           </div>
         </Reveal>
 
-        {/* The terminal */}
+        {/* The dashboard */}
         <Reveal delay={0.1} className="min-w-0">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-pool">
             <pre className="grow overflow-x-auto p-7 font-mono text-[13px] leading-7 text-ink-soft">
               <code>
-                <span className="text-mint">$</span> yumii{"\n"}
-                {"\n"}
-                <span className="text-ink-dim">
-                  she is awake, listening in your shell
-                </span>
+                <span className="text-ink-dim">yumii dashboard</span>
                 {"\n"}
                 {"\n"}
-                <span className="text-cyan">/memory</span>
-                {"        everything she remembers\n"}
-                <span className="text-cyan">/personality</span>
-                {"   switch her mood\n"}
-                <span className="text-cyan">/sessions</span>
-                {"      pick up any conversation"}
+                <span className="text-cyan">Chats</span>
+                {"       every conversation, resumable\n"}
+                <span className="text-cyan">Memory</span>
+                {"      what she knows about you\n"}
+                <span className="text-cyan">Tools</span>
+                {"       what she's allowed to touch\n"}
+                <span className="text-cyan">Settings</span>
+                {"    her mind, voice, and mood"}
               </code>
             </pre>
             <div className="border-t border-line-soft p-7">
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="font-display text-xl font-semibold text-ink">
-                  The terminal
+                  The dashboard
                 </h3>
                 <span className="font-mono text-xs text-ink-dim">
-                  for developers
+                  everything, visible
                 </span>
               </div>
               <ul className="mt-4 space-y-2.5 text-[15px] leading-relaxed text-ink-soft">
-                {terminalPoints.map((point) => (
+                {dashboardPoints.map((point) => (
                   <li key={point}>{point}</li>
                 ))}
               </ul>

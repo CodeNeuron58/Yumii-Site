@@ -32,9 +32,10 @@ export function Attribution() {
           The orb is her <em className="italic text-mint">first form</em>.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-ink-soft">
-          An animated companion who blinks, emotes, and lip-syncs as she
-          speaks is on the way. Yumii is open source and shaped in the open;
-          the next feature might be yours.
+          Next she learns to see your screen, and to speak first when
+          something matters. One day, an animated companion who blinks and
+          emotes as she talks — the long dream. Yumii is open source and
+          shaped in the open; the next feature might be yours.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-4">

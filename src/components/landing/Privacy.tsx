@@ -10,8 +10,8 @@ const guarantees = [
     desc: "Everything she knows about you sits in plain local storage. Read it, edit it, delete it. It's yours.",
   },
   {
-    title: "Keys in your system's own vault",
-    desc: "Credentials live in your operating system's secure keychain, never in a text file, never on a server.",
+    title: "Keys in a file only you can read",
+    desc: "API keys live in an owner-only local file with atomic writes — the same storage model Claude Code uses. Never on a server.",
   },
   {
     title: "No account. No cloud. No telemetry.",

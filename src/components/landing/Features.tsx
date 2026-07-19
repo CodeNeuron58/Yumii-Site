@@ -71,7 +71,7 @@ export function Features() {
               </p>
             </div>
             <div className="mt-8 flex flex-wrap gap-2">
-              {["Groq", "OpenAI", "Anthropic"].map((name) => (
+              {["Ollama", "Groq", "OpenAI", "Anthropic"].map((name) => (
                 <span
                   key={name}
                   className="rounded-full border border-line px-3.5 py-1 font-mono text-xs text-ink-soft"
@@ -104,9 +104,9 @@ export function Features() {
                 Gets things done
               </h3>
               <p className="mt-2.5 max-w-[42ch] text-[15px] leading-relaxed text-ink-soft">
-                Ask her to look something up or check the time across the
-                world. When a task reaches beyond your machine, she asks
-                before acting.
+                Ask her to search the web, read your inbox, or check your
+                calendar. When a task reaches beyond your machine, she asks
+                before acting — every time.
               </p>
             </div>
             <div

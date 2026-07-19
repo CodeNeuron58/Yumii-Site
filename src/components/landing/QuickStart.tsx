@@ -38,7 +38,8 @@ export function QuickStart() {
           Two minutes, <em className="italic text-mint">and she&apos;s yours</em>.
         </h2>
         <p className="mt-4 max-w-[40ch] text-ink-soft">
-          Runs on Windows, macOS and Linux. An everyday laptop is plenty.
+          Windows today; macOS and Linux coming soon. An everyday laptop is
+          plenty — no GPU needed.
         </p>
         <a
           href="/docs/install"
@@ -68,37 +69,45 @@ export function QuickStart() {
           </div>
 
           <div className="relative bg-night px-6 py-6">
-            <pre className="overflow-x-auto pr-12 font-mono text-[13.5px] leading-7">
-              <code>
-                <span className="text-ink-dim">{QUICKSTART_COMMENT}</span>
-                {"\n"}
-                {active.commandLines.map((line, idx) => (
-                  <span key={idx}>
-                    {idx === 0 ? (
-                      <>
-                        <span className="text-mint">$ </span>
-                        <span className="text-ink">{line}</span>
-                      </>
-                    ) : (
-                      <span className="text-ink">{"  " + line}</span>
-                    )}
+            {active.comingSoon ? (
+              <p className="grid min-h-16 place-items-center font-mono text-[13.5px] text-ink-dim">
+                coming soon
+              </p>
+            ) : (
+              <>
+                <pre className="overflow-x-auto pr-12 font-mono text-[13.5px] leading-7">
+                  <code>
+                    <span className="text-ink-dim">{QUICKSTART_COMMENT}</span>
                     {"\n"}
-                  </span>
-                ))}
-              </code>
-            </pre>
-            <button
-              type="button"
-              onClick={handleCopy}
-              aria-label="Copy command to clipboard"
-              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-line text-ink-soft transition-colors hover:border-mint/50 hover:text-mint"
-            >
-              {copied ? (
-                <CheckIcon size={16} aria-hidden="true" />
-              ) : (
-                <CopySimpleIcon size={16} aria-hidden="true" />
-              )}
-            </button>
+                    {active.commandLines.map((line, idx) => (
+                      <span key={idx}>
+                        {idx === 0 ? (
+                          <>
+                            <span className="text-mint">$ </span>
+                            <span className="text-ink">{line}</span>
+                          </>
+                        ) : (
+                          <span className="text-ink">{"  " + line}</span>
+                        )}
+                        {"\n"}
+                      </span>
+                    ))}
+                  </code>
+                </pre>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  aria-label="Copy command to clipboard"
+                  className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-line text-ink-soft transition-colors hover:border-mint/50 hover:text-mint"
+                >
+                  {copied ? (
+                    <CheckIcon size={16} aria-hidden="true" />
+                  ) : (
+                    <CopySimpleIcon size={16} aria-hidden="true" />
+                  )}
+                </button>
+              </>
+            )}
           </div>
 
           <p className="border-t border-line-soft px-6 py-4 text-[13px] text-ink-dim">

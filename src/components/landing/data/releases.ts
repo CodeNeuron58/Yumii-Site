@@ -7,24 +7,24 @@ export type Release = {
 
 export const releases: Release[] = [
   {
-    version: "v0.4.0",
+    version: "v0.13.0",
     date: "July 2026",
-    title: "Yumii moves to the desktop",
+    title: "The polish release",
     summary:
-      "A floating orb that's always within reach. Sharper hearing that ignores humming and background noise, plus an offline word-by-word listening option.",
+      "Sharper web search that can never hang a turn, a smaller and tidier orb you move by grabbing it, and an installer that survives locked-down laptops.",
   },
   {
-    version: "v0.3.0",
-    date: "June 2026",
-    title: "She can do things now",
+    version: "v0.12.0",
+    date: "July 2026",
+    title: "The first-run release",
     summary:
-      "Real task-doing, gated by your approval. Web search built in, and faster streaming replies.",
+      "A fresh install now guides you: her voice and ears download behind a progress bar, one key wakes her up, and nothing ever freezes silently.",
   },
   {
-    version: "v0.2.0",
-    date: "June 2026",
-    title: "She remembers you",
+    version: "v0.11.0",
+    date: "July 2026",
+    title: "One command, deeper memory",
     summary:
-      "Long-term memory stored on your disk, conversations that resume where you left off, and facts she learns about you automatically.",
+      "The single-command install arrives — and she starts searching every past conversation, writing her own facts, and knowing when things happened.",
   },
 ];

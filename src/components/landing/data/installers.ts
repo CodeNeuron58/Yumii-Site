@@ -3,6 +3,7 @@ export type Installer = {
   label: string;
   commandLines: string[];
   note: string;
+  comingSoon?: boolean;
 };
 
 export const installers: Installer[] = [
@@ -15,8 +16,9 @@ export const installers: Installer[] = [
   {
     id: "unix",
     label: "macOS / Linux",
-    commandLines: ["curl -fsSL https://yumii.me/install.sh | bash"],
-    note: "Installs the backend today — the native desktop app for macOS and Linux is on the way.",
+    commandLines: [],
+    comingSoon: true,
+    note: "The native desktop app for macOS and Linux is coming soon.",
   },
   {
     id: "source",

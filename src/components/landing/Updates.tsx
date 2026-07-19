@@ -19,7 +19,7 @@ export function Updates() {
           </a>
         </div>
         <p className="mt-4 max-w-[52ch] text-ink-soft">
-          Three releases in two months, and counting.
+          Thirteen releases in two months, and counting.
         </p>
       </Reveal>
 
