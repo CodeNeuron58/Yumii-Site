@@ -1,359 +1,109 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────────────
-   Yumii: "one living light in a dark room."
-   The whole identity derives from the orb asset itself:
-   pale aqua highlight → spring-green core → cyan rim, on green-black night.
+   Yumii: a quiet companion at the top of your screen.
+   Cream paper, forest green, one mint accent — the same greens as the
+   app icon and the island's "listening" colour. The island itself is
+   always near-black, exactly like the real one on your desktop.
 
-   Shape rule (locked): interactive elements are pills (radius-full),
-   containers are 16px (rounded-2xl). Nothing else.
-   Accent rule (locked): one accent family, the aurora (mint → cyan),
-   used identically on every section.
-   Theme: dark only. She is a glow; the page is the dark she glows in.
+   Scroll scenes: elements tagged data-scene get --p (0→1 progress) and,
+   for the pinned section, --e (entry ease) from ScrollScenes. Defaults
+   in the CSS keep everything fully visible without JavaScript.
    ──────────────────────────────────────────────────────────────────── */
 
+/* Phones with short screens (iPhone SE and friends): the pinned "How it
+   works" scene tightens so the steps and the laptop both fit. */
+@custom-variant short-phone (@media (max-width: 767px) and (max-height: 740px));
+
 @theme {
-  /* Night ground */
-  --color-night: #050f0a;
-  --color-pool: #08150f;
-  --color-pool-2: #0c1d15;
+  --color-cream: #fbf7ec;
+  --color-mist: #e3eedd;
+  --color-line: #dce5d5;
+  --color-ink: #14301f;
+  --color-soft: #3b5446;
+  --color-muted: #6a7f70;
+  --color-forest: #134a33;
+  --color-forest-hover: #1f6b47;
+  --color-leaf: #2e7d4f;
+  --color-sage: #5baa6a;
+  --color-dot: #a9bfa9;
+  --color-panel-ink: #cfe3d3;
+  --color-blush: #f4c9cf;
 
-  /* Ink */
-  --color-ink: #ecf7f1;
-  --color-ink-soft: #a9c4b7;
-  --color-ink-dim: #6f8d7e;
+  /* the island (matches the app) */
+  --color-island: #0a0a0a;
+  --color-island-ink: #ededed;
+  --color-island-dim: #bdbdbd;
+  --color-island-btn: #262626;
+  --color-mint: #8fd3a8;
+  --color-amber: #f2b84b;
+  --color-amber-ink: #1a1200;
 
-  /* The aurora, sampled from the orb asset */
-  --color-mint: #3ee6a8;
-  --color-cyan: #2fd2e9;
-  --color-mint-deep: #073024;
-  --color-aqua-pale: #b9fbe9;
-
-  /* Hairlines */
-  --color-line: rgba(125, 232, 195, 0.12);
-  --color-line-soft: rgba(125, 232, 195, 0.07);
-
-  /* Type */
   --font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui,
     sans-serif;
-  --font-body: var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+  --font-body: var(--font-figtree), "Figtree", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace,
     monospace;
 }
 
 @layer base {
   html {
-    background-color: var(--color-night);
+    background-color: var(--color-cream);
     color: var(--color-ink);
-    color-scheme: dark;
-    /* the orb's listening ripples scale past the viewport edge on
-       small screens; clip instead of creating horizontal scroll */
+    color-scheme: light;
     overflow-x: clip;
   }
-  pre {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(125, 232, 195, 0.18) transparent;
+  a {
+    color: var(--color-forest);
   }
-  pre::-webkit-scrollbar {
-    height: 8px;
-  }
-  pre::-webkit-scrollbar-thumb {
-    background: rgba(125, 232, 195, 0.18);
-    border-radius: 9999px;
-  }
-  pre::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  body {
-    font-size: 16.5px;
-    line-height: 1.65;
+  a:hover {
+    color: var(--color-leaf);
   }
   ::selection {
-    background: var(--color-mint);
-    color: var(--color-mint-deep);
+    background: var(--color-mist);
+    color: var(--color-forest);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-leaf);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
-@layer components {
-  /* ── Buttons (pill, per shape rule) ────────────────────────────── */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    height: 3rem;
-    padding: 0 1.75rem;
-    border-radius: 9999px;
-    background: linear-gradient(120deg, var(--color-mint), #35dcc4);
-    color: var(--color-mint-deep);
-    font-weight: 600;
-    font-size: 15.5px;
-    white-space: nowrap;
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.3s ease;
-    box-shadow: 0 0 0 rgba(62, 230, 168, 0);
-  }
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 28px rgba(62, 230, 168, 0.28);
-  }
-  .btn-primary:active {
-    transform: scale(0.98);
-  }
-
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    height: 3rem;
-    padding: 0 1.5rem;
-    border-radius: 9999px;
-    border: 1px solid var(--color-line);
-    color: var(--color-ink);
-    font-weight: 500;
-    font-size: 15.5px;
-    white-space: nowrap;
-    transition: border-color 0.25s ease, color 0.25s ease,
-      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn-ghost:hover {
-    border-color: rgba(62, 230, 168, 0.45);
-    color: var(--color-mint);
-  }
-  .btn-ghost:active {
-    transform: scale(0.98);
-  }
-
-  /* ── The orb ───────────────────────────────────────────────────────
-     A faithful CSS rendition of the product: highlight upper-left,
-     spring-green core, cyan lower rim, soft aurora glow.
-     Size via --orb-size on .orb-stage. States via data-state.        */
-  .orb-stage {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: var(--orb-size, 250px);
-    aspect-ratio: 1;
-  }
-  .orb-stage:focus-visible {
-    outline: 2px solid var(--color-mint);
-    outline-offset: 10px;
-    border-radius: 50%;
-  }
-
-  .orb {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at 33% 28%,
-      #b9fbe9 0%,
-      #62f2c4 18%,
-      #2ee6a0 42%,
-      #19c9d8 70%,
-      #0d9fc9 88%,
-      #0a86ad 100%
-    );
-    box-shadow: 0 0 calc(var(--orb-size, 250px) * 0.18)
-        rgba(46, 230, 170, 0.35),
-      0 0 calc(var(--orb-size, 250px) * 0.5) rgba(35, 200, 225, 0.22),
-      inset calc(var(--orb-size, 250px) * -0.07)
-        calc(var(--orb-size, 250px) * -0.1)
-        calc(var(--orb-size, 250px) * 0.2) rgba(4, 48, 62, 0.55),
-      inset calc(var(--orb-size, 250px) * 0.04)
-        calc(var(--orb-size, 250px) * 0.05)
-        calc(var(--orb-size, 250px) * 0.12) rgba(255, 255, 255, 0.25);
-    animation: orb-breathe 5.5s ease-in-out infinite;
-    transition: filter 0.5s ease;
-  }
-  /* soft specular highlight */
-  .orb::before {
-    content: "";
-    position: absolute;
-    top: 12%;
-    left: 17%;
-    width: 36%;
-    height: 27%;
-    border-radius: 50%;
-    background: radial-gradient(
-      closest-side,
-      rgba(255, 255, 255, 0.6),
-      transparent 72%
-    );
-    filter: blur(4px);
-  }
-  /* thinking swirl (hidden unless thinking) */
-  .orb::after {
-    content: "";
-    position: absolute;
-    inset: 5%;
-    border-radius: 50%;
-    background: conic-gradient(
-      from 0deg,
-      transparent 0% 68%,
-      rgba(255, 255, 255, 0.3) 82%,
-      transparent 96%
-    );
-    filter: blur(3px);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  /* listening ripples */
-  .orb-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 1.5px solid rgba(62, 230, 190, 0.5);
-    opacity: 0;
-    pointer-events: none;
-  }
-  .orb-ring-2 {
-    border-color: rgba(47, 210, 233, 0.4);
-  }
-
-  /* state wiring */
-  [data-state="listening"] .orb {
-    filter: brightness(1.08);
-  }
-  [data-state="listening"] .orb-ring {
-    animation: orb-ripple 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-  }
-  [data-state="listening"] .orb-ring-2 {
-    animation-delay: 0.9s;
-  }
-  [data-state="thinking"] .orb::after {
-    opacity: 1;
-    animation: orb-swirl 1.7s linear infinite;
-  }
-  [data-state="speaking"] .orb {
-    animation: orb-breathe 5.5s ease-in-out infinite,
-      orb-speak 0.85s ease-in-out infinite;
-  }
-
-  /* voice waveform (visible while speaking) */
-  .orb-wave {
-    position: absolute;
-    bottom: -14%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    height: 20px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  [data-state="speaking"] .orb-wave {
-    opacity: 1;
-  }
-  .orb-wave span {
-    width: 3px;
-    border-radius: 9999px;
-    background: linear-gradient(180deg, var(--color-mint), var(--color-cyan));
-    animation: orb-wavebar 0.9s ease-in-out infinite;
-  }
-  .orb-wave span:nth-child(1) { height: 45%; animation-delay: 0s; }
-  .orb-wave span:nth-child(2) { height: 80%; animation-delay: 0.15s; }
-  .orb-wave span:nth-child(3) { height: 100%; animation-delay: 0.3s; }
-  .orb-wave span:nth-child(4) { height: 70%; animation-delay: 0.45s; }
-  .orb-wave span:nth-child(5) { height: 50%; animation-delay: 0.6s; }
-
-  /* mood-tinted orb (Personality section: the orb really recolours) */
-  .orb-tinted {
-    background: radial-gradient(
-      circle at 33% 28%,
-      color-mix(in oklab, var(--p-tint) 25%, white) 0%,
-      var(--p-tint) 48%,
-      color-mix(in oklab, var(--p-tint) 45%, #052018) 100%
-    );
-    box-shadow: 0 0 22px color-mix(in oklab, var(--p-tint) 45%, transparent),
-      inset -5px -7px 14px rgba(0, 0, 0, 0.35),
-      inset 3px 4px 10px rgba(255, 255, 255, 0.28);
-  }
-}
-
-@layer utilities {
-  .font-display {
-    font-family: var(--font-display);
-  }
-}
-
-/* ── Keyframes ─────────────────────────────────────────────────────── */
-@keyframes orb-breathe {
+@keyframes y-pulse {
   0%,
   100% {
     transform: scale(1);
+    opacity: 1;
   }
   50% {
-    transform: scale(1.035);
+    transform: scale(1.6);
+    opacity: 0.5;
   }
 }
-@keyframes orb-ripple {
-  0% {
-    transform: scale(0.65);
-    opacity: 0.55;
-  }
-  100% {
-    transform: scale(1.55);
-    opacity: 0;
-  }
-}
-@keyframes orb-swirl {
+@keyframes y-spin {
   to {
     transform: rotate(360deg);
   }
 }
-@keyframes orb-speak {
+@keyframes y-wave {
   0%,
   100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.16);
-  }
-}
-@keyframes orb-wavebar {
-  0%,
-  100% {
-    transform: scaleY(0.4);
+    transform: scaleY(0.35);
   }
   50% {
     transform: scaleY(1);
   }
 }
-@keyframes star-twinkle {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-@keyframes orb-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-7px);
-  }
-}
 
-/* ── Reduced motion: the light holds still ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .orb,
-  .orb::after,
-  .orb-ring,
-  .orb-wave span,
-  .star-dot,
-  .float-gentle {
-    animation: none !important;
+  html {
+    scroll-behavior: auto !important;
   }
-  .orb-wave {
-    opacity: 0 !important;
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

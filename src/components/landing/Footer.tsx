@@ -1,35 +1,20 @@
-import Image from "next/image";
+import { LINKS } from "./data/content";
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-line-soft">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-7 text-sm text-ink-dim md:px-8">
-        <div className="flex items-center gap-2.5">
-          <Image src="/orb-logo.png" alt="" width={18} height={18} />
-          <span>© 2026 Yumii, MIT licensed</span>
-        </div>
-        <nav className="flex items-center gap-6">
-          <a
-            href="https://github.com/CodeNeuron58/Yumii"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="transition-colors hover:text-mint"
-          >
-            GitHub
-          </a>
-          <a href="/docs" className="transition-colors hover:text-mint">
-            Docs
-          </a>
-          <a
-            href="https://github.com/CodeNeuron58/Yumii/blob/master/CHANGELOG.md"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="transition-colors hover:text-mint"
-          >
-            Changelog
-          </a>
-        </nav>
-      </div>
+    <footer className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-3 px-5 pb-10 pt-2 text-sm text-muted sm:px-[clamp(20px,4vw,48px)]">
+      <span>© 2026 Yumii · MIT licensed · built with NVIDIA Nemotron on Nebius Token Factory</span>
+      <nav aria-label="Footer" className="flex items-center gap-6">
+        <a href={LINKS.docs} className="text-muted no-underline hover:text-leaf">
+          Docs
+        </a>
+        <a href={LINKS.github} target="_blank" rel="noreferrer" className="text-muted no-underline hover:text-leaf">
+          GitHub
+        </a>
+        <a href={LINKS.changelog} target="_blank" rel="noreferrer" className="text-muted no-underline hover:text-leaf">
+          Changelog
+        </a>
+      </nav>
     </footer>
   );
 }
